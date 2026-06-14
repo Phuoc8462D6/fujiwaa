@@ -32,28 +32,35 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.06), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+        }
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
     <!-- TOP BAR -->
-    <div class="bg-fujiwa-900 text-white text-xs py-2 px-4">
+    <div class="bg-fujiwa-900 text-white text-xs py-2 px-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1"><i data-lucide="phone" class="w-3.5 h-3.5 text-fujiwa-200"></i> Hotline: 1900 6759</span>
-                <span class="hidden md:flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5 text-fujiwa-200"></i> info@fujiwavietnam.vn</span>
+                <span class="flex items-center gap-1"><i data-lucide="phone" class="w-3.5 h-3.5 text-fujiwa-200"></i> Hotline hỗ trợ: 1900 8462</span>
+                <span class="hidden md:flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5 text-fujiwa-200"></i> 8462D6@fujiwavietnam.vn</span>
             </div>
             <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Công nghệ Ion Kiềm Nhật Bản đạt chuẩn ISO</span>
+                <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Công nghệ Ion Kiềm Nhật Bản đạt chuẩn ISO 22000 & HACCP</span>
             </div>
         </div>
     </div>
 
     <!-- MAIN HEADER -->
-    <header class="bg-white/95 backdrop-blur sticky top-0 z-50 shadow-sm border-b border-slate-100 transition-all duration-300">
+    <header class="bg-white/95 backdrop-blur sticky top-8 z-40 shadow-sm border-b border-slate-100 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
@@ -76,8 +83,8 @@
                 <div class="flex items-center gap-4">
                     <!-- Nút tìm kiếm nhanh -->
                     <div class="relative hidden md:block">
-                        <input type="text" placeholder="Tìm sản phẩm..." class="bg-slate-100 border-none rounded-full py-1.5 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-fujiwa-500 w-48 focus:w-64 transition-all duration-300">
-                        <i data-lucide="search" class="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400"></i>
+                        <input type="text" id="global-search-input" oninput="handleSearch(this.value)" placeholder="Tìm sản phẩm..." class="bg-slate-100 border-none rounded-full py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-fujiwa-500 w-48 focus:w-64 transition-all duration-300">
+                        <i data-lucide="search" class="absolute left-3.5 top-2.5 w-4.5 h-4.5 text-slate-400"></i>
                     </div>
 
                     <!-- Giỏ hàng -->
@@ -96,6 +103,10 @@
 
         <!-- Mobile Menu (Dropdown) -->
         <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white/95 px-4 py-4 space-y-3 shadow-lg">
+            <div class="relative mb-3">
+                <input type="text" oninput="handleSearch(this.value)" placeholder="Tìm sản phẩm..." class="w-full bg-slate-100 border-none rounded-full py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-fujiwa-500">
+                <i data-lucide="search" class="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400"></i>
+            </div>
             <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-semibold text-fujiwa-500 bg-fujiwa-50 rounded-lg">Trang chủ</button>
             <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">Giới thiệu</button>
             <button onclick="navigateTo('products'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">Sản phẩm</button>
@@ -127,7 +138,7 @@
                                 Fujiwa Việt Nam mang đến giải pháp thanh lọc cơ thể toàn diện bằng công nghệ Nhật Bản tiên tiến. Sạch hơn, khỏe hơn mỗi ngày cùng chúng tôi.
                             </p>
                             <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                                <button onclick="navigateTo('products')" class="px-8 py-3.5 bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-semibold rounded-full shadow-lg shadow-fujiwa-500/20 hover:shadow-fujiwa-600/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                                <button onclick="navigateTo('products')" class="px-8 py-3.5 bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-semibold rounded-full shadow-lg shadow-fujiwa-500/20 hover:shadow-fuji600/30 transition-all duration-300 transform hover:-translate-y-0.5">
                                     Mua Sắm Ngay
                                 </button>
                                 <button onclick="navigateTo('about')" class="px-8 py-3.5 bg-white hover:bg-slate-50 text-fujiwa-500 font-semibold rounded-full border border-slate-200 shadow-sm transition-all duration-300">
@@ -165,7 +176,7 @@
                             <div class="w-12 h-12 bg-fujiwa-100 text-fujiwa-500 rounded-xl flex items-center justify-center mb-6">
                                 <i data-lucide="droplet" class="w-6 h-6"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-slate-800">Độ pH lý tưởng 8.5+</h3>
+                            <h3 class="text-xl font-bold mb-3 text-slate-800">Độ pH lý tưởng 8.5 - 9.5+</h3>
                             <p class="text-slate-500 text-sm leading-relaxed">Giúp trung hòa axit dư thừa trong dạ dày, cải thiện hiệu quả hệ tiêu hóa và hỗ trợ ngăn ngừa các bệnh mãn tính.</p>
                         </div>
                         <!-- Card 2 -->
@@ -201,8 +212,8 @@
                         </button>
                     </div>
 
-                    <!-- Grid Sản phẩm nổi bật (Render đúng 3 sản phẩm được yêu cầu) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featured-products-grid">
+                    <!-- Grid Sản phẩm nổi bật (Render mẫu 4 sản phẩm) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featured-products-grid">
                         <!-- Sẽ tự động kết xuất bằng JS để đồng bộ hóa dữ liệu chính xác -->
                     </div>
                 </div>
@@ -219,7 +230,7 @@
                             <div class="space-y-6">
                                 <h3 class="text-3xl sm:text-4xl font-extrabold leading-tight">Chăm sóc gia đình thân yêu bằng sản phẩm I-on tốt nhất</h3>
                                 <p class="text-fujiwa-100 text-base max-w-lg">
-                                    Đừng bỏ lỡ các chương trình ưu đãi đặc quyền hàng tháng tại Fujiwa Việt Nam. Đăng ký nhận thông tin khuyễn mãi ngay hôm nay!
+                                    Đừng bỏ lỡ các chương trình ưu đãi đặc quyền hàng tháng tại Fujiwa Việt Nam. Đăng ký nhận thông tin khuyến mãi ngay hôm nay!
                                 </p>
                                 <div class="flex flex-col sm:flex-row gap-3">
                                     <input type="email" placeholder="Nhập email của bạn..." class="bg-white/15 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white rounded-full py-3 px-6 text-sm flex-grow">
@@ -239,22 +250,42 @@
         <div id="page-products" class="page-content hidden py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Banner trang sản phẩm -->
-                <div class="bg-slate-100 rounded-3xl p-8 sm:p-12 mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="bg-slate-100 rounded-3xl p-8 sm:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="space-y-4 max-w-lg">
                         <span class="text-fujiwa-500 font-bold text-sm tracking-widest uppercase">Cửa Hàng Trực Tuyến</span>
                         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Danh Mục Sản Phẩm</h1>
-                        <p class="text-slate-500">Khám phá dải sản phẩm chăm sóc sức khỏe, vệ sinh cá nhân và gia đình công nghệ cao từ Fujiwa.</p>
+                        <p class="text-slate-500">Khám phá dải sản phẩm sức khỏe, nước ion kiềm chất lượng Nhật Bản và các giải pháp chăm sóc gia đình.</p>
                     </div>
-                    <div class="flex gap-4">
-                        <button onclick="filterProducts('all')" class="bg-fujiwa-500 text-white font-semibold py-2 px-6 rounded-full shadow-md text-sm filter-btn" id="btn-filter-all">Tất cả</button>
-                        <button onclick="filterProducts('drink')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn" id="btn-filter-drink">Nước uống</button>
-                        <button onclick="filterProducts('hygiene')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn" id="btn-filter-hygiene">Chăm sóc & Vệ sinh</button>
+                    <!-- Tìm kiếm & Lọc trên trang -->
+                    <div class="w-full md:w-auto flex flex-col gap-3">
+                        <div class="relative">
+                            <input type="text" id="shop-search-input" oninput="handleSearch(this.value)" placeholder="Tìm trong danh mục..." class="w-full md:w-80 bg-white border border-slate-200 rounded-full py-2.5 px-5 pl-11 text-sm focus:outline-none focus:ring-2 focus:ring-fujiwa-500 shadow-sm">
+                            <i data-lucide="search" class="absolute left-4 top-3 w-4 h-4 text-slate-400"></i>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Thanh lọc danh mục hiện đại -->
+                <div class="flex flex-wrap gap-2.5 justify-center mb-10" id="filter-buttons-container">
+                    <button onclick="filterProducts('all')" class="bg-fujiwa-500 text-white font-semibold py-2.5 px-6 rounded-full shadow-md text-sm filter-btn transition-all duration-200" id="btn-filter-all">Tất cả</button>
+                    <button onclick="filterProducts('drink')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-drink">Nước uống & Bù Ion</button>
+                    <button onclick="filterProducts('hygiene')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-hygiene">Chăm sóc & Vệ sinh</button>
+                    <button onclick="filterProducts('supplement')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-supplement">Hỗ trợ sức khỏe</button>
+                    <button onclick="filterProducts('combo')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-combo">Combo ưu đãi</button>
+                </div>
+
                 <!-- Grid Sản Phẩm Chính -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="products-grid">
                     <!-- Javascript sẽ đổ dữ liệu đầy đủ vào đây -->
+                </div>
+
+                <!-- Empty State khi không tìm thấy kết quả -->
+                <div id="empty-state" class="hidden text-center py-16">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="search-code" class="w-8 h-8 text-slate-400"></i>
+                    </div>
+                    <p class="text-slate-500 text-lg font-medium">Không tìm thấy sản phẩm phù hợp</p>
+                    <p class="text-slate-400 text-sm mt-1">Vui lòng thử lại với từ khóa khác.</p>
                 </div>
             </div>
         </div>
@@ -265,38 +296,64 @@
                 <!-- Tiêu đề trang -->
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <span class="text-fujiwa-500 font-bold tracking-wider uppercase text-xs">Về chúng tôi</span>
-                    <h1 class="text-4xl font-extrabold text-slate-900 mt-2">Về Fujiwa Việt Nam</h1>
+                    <h1 class="text-4xl font-extrabold text-slate-900 mt-2">Giới Thiệu Fujiwa Việt Nam</h1>
                     <div class="h-1 w-20 bg-fujiwa-500 mx-auto mt-4 rounded-full"></div>
-                    <p class="text-slate-500 mt-4 leading-relaxed">Chúng tôi tự hào là thương hiệu Việt tiên phong đưa công nghệ tạo nước uống I-on Kiềm chuẩn y khoa từ Nhật Bản phục vụ hàng triệu gia đình.</p>
+                    <p class="text-slate-500 mt-4 leading-relaxed">Chúng tôi tự hào là thương hiệu hàng đầu cung cấp giải pháp bảo vệ sức khỏe cộng đồng qua nguồn nước và sản phẩm ứng dụng công nghệ I-ON chuẩn Nhật Bản.</p>
                 </div>
 
-                <!-- Nội dung chính giới thiệu -->
+                <!-- Nội dung chính giới thiệu chi tiết (Lấy từ ve-fujiwa) -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-900 mb-4">Hành Trình Kiến Tạo Sức Khỏe</h2>
-                        <p class="text-slate-600 mb-4 leading-relaxed">
-                            Được thành lập với sứ mệnh mang đến nguồn nước tốt cho sức khỏe người Việt, Công ty TNHH Fujiwa Việt Nam đã đầu tư xây dựng nhà máy hiện đại, lắp đặt dây chuyền sản xuất tự động khép kín chuyển giao trực tiếp từ Nhật Bản.
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-bold text-slate-900">Lịch Sử Thành Lập & Sự Mệnh</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Được thành lập vào năm 2018, Công ty TNHH Fujiwa Việt Nam tự hào sở hữu nhà máy sản xuất quy mô lớn tại xã Bình Mỹ, huyện Củ Chi, TP. Hồ Chí Minh với tổng diện tích hơn 18.000m². Nhà máy được thiết kế và vận hành nghiêm ngặt theo các tiêu chuẩn cao nhất về an toàn thực phẩm và môi trường sinh thái.
                         </p>
-                        <p class="text-slate-600 mb-6 leading-relaxed">
-                            Mỗi sản phẩm Fujiwa đóng chai đến tay khách hàng đều trải qua quy trình kiểm soát nghiêm ngặt, đảm bảo các tiêu chuẩn chất lượng cao nhất về nước sạch và y sinh, bổ sung các vi chất, kiềm tính tự nhiên cần thiết cho cuộc sống hiện đại năng động.
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Fujiwa được đầu tư bài bản với hệ thống trang thiết bị tự động hóa khép kín 100% chuyển giao hoàn toàn từ tập đoàn OSG Nhật Bản - đơn vị hàng đầu về máy tạo nước ion kiềm y khoa. Chúng tôi mang đến cho gia đình Việt những sản phẩm xanh, bảo vệ sức khỏe và nâng cao tuổi thọ một cách tự nhiên nhất.
                         </p>
-                        <div class="grid grid-cols-2 gap-6 pt-4 border-t border-slate-100">
-                            <div>
-                                <h4 class="text-3xl font-extrabold text-fujiwa-500">100%</h4>
-                                <p class="text-sm font-semibold text-slate-700 mt-1">Dây chuyền Nhật Bản</p>
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <h4 class="text-2xl font-bold text-fujiwa-500">18,000 m²</h4>
+                                <p class="text-xs text-slate-500 mt-1">Diện tích nhà máy Củ Chi</p>
                             </div>
-                            <div>
-                                <h4 class="text-3xl font-extrabold text-fujiwa-500">Million+</h4>
-                                <p class="text-sm font-semibold text-slate-700 mt-1">Khách hàng tin dùng</p>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <h4 class="text-2xl font-bold text-fujiwa-500">100%</h4>
+                                <p class="text-xs text-slate-500 mt-1">Nhập khẩu công nghệ Nhật</p>
                             </div>
                         </div>
                     </div>
                     <div class="relative">
-                        <!-- Khung hình minh họa công nghệ y tế nước -->
-                        <div class="bg-slate-100 rounded-3xl p-8 aspect-video flex items-center justify-center overflow-hidden shadow-inner border border-slate-200">
+                        <!-- Khung hình minh họa nhà máy Fujiwa -->
+                        <div class="bg-slate-100 rounded-3xl p-6 aspect-video flex items-center justify-center overflow-hidden shadow-inner border border-slate-200">
                             <img src="https://fujiwavietnam.vn/wp-content/uploads/2025/11/fujion-2-frame-2-1691478182390.jpg" 
-                                 alt="Nhà máy và quy trình Fujiwa" 
+                                 alt="Nhà máy Fujiwa Việt Nam Củ Chi" 
                                  class="rounded-2xl object-cover w-full h-full transform hover:scale-102 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Công Nghệ Độc Quyền & Chứng Nhận Chất Lượng -->
+                <div class="bg-slate-50 rounded-3xl p-8 sm:p-12 mb-16 border border-slate-100">
+                    <div class="max-w-3xl mb-8">
+                        <h3 class="text-2xl font-bold text-slate-900">Hệ Thống Tiêu Chuẩn & Chứng Nhận Đạt Được</h3>
+                        <p class="text-slate-500 text-sm mt-2">Minh chứng cho chất lượng chuẩn y khoa của sản phẩm Fujiwa trên toàn cầu.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center"><i data-lucide="award" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-slate-800 text-sm">Chứng nhận FDA Hoa Kỳ</h4>
+                            <p class="text-slate-500 text-xs leading-relaxed">Đạt tiêu chuẩn xuất khẩu nghiêm ngặt vào thị trường Hoa Kỳ và toàn thế giới về an toàn thực phẩm dược phẩm.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center"><i data-lucide="activity" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-slate-800 text-sm">ISO 13485:2016</h4>
+                            <p class="text-slate-500 text-xs leading-relaxed">Chứng chỉ thiết bị y tế tiêu chuẩn quốc tế, bảo chứng cho đặc tính hỗ trợ sức khỏe chuẩn y sinh học của nước ion kiềm.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center"><i data-lucide="check-square" class="w-5 h-5"></i></div>
+                            <h4 class="font-bold text-slate-800 text-sm">HACCP & GMP Codex</h4>
+                            <p class="text-slate-500 text-xs leading-relaxed">Hệ thống phân tích mối nguy và kiểm soát điểm tới hạn cùng thực hành sản xuất tốt giúp từng sản phẩm đạt độ sạch vô trùng.</p>
                         </div>
                     </div>
                 </div>
@@ -308,14 +365,14 @@
                             <i data-lucide="eye" class="w-5 h-5"></i>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Tầm Nhìn</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Trở thành thương hiệu biểu tượng trong ngành công nghiệp nước I-on kiềm và bảo vệ sức khỏe người dùng tại Đông Nam Á, nâng cao vị thế hàng Việt Nam chất lượng cao trên thị trường quốc tế.</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Fujiwa Việt Nam hướng tới trở thành thương hiệu biểu tượng trong ngành công nghiệp nước I-on kiềm và sản phẩm xanh bảo vệ sức khỏe hàng đầu tại Đông Nam Á, mang đến niềm tự hào thương hiệu Việt ra thế giới.</p>
                     </div>
                     <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
                         <div class="w-10 h-10 bg-fujiwa-500 text-white rounded-lg flex items-center justify-center mb-6">
                             <i data-lucide="target" class="w-5 h-5"></i>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Sứ Mệnh</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Đem lại nguồn sống chất lượng nhất cho cộng đồng thông qua các dòng sản phẩm đa công dụng, thúc đẩy lối sống xanh lành mạnh, bảo vệ môi trường và đồng hành cùng sức khỏe thế hệ tương lai.</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">“Chung tay vì sức khỏe cộng đồng” - Bằng việc không ngừng cải tiến khoa học kỹ thuật, Fujiwa mang nguồn nước quý giá và sản phẩm xanh chất lượng Nhật bảo bọc thể trạng con người Việt Nam bền bỉ mỗi ngày.</p>
                     </div>
                 </div>
             </div>
@@ -361,7 +418,7 @@
                         </form>
                     </div>
 
-                    <!-- Cột 3: Thông tin chi nhánh -->
+                    <!-- Cột 3: Thông tin chi nhánh (Đã đổi sang hotline & mail mới) -->
                     <div class="bg-fujiwa-900 text-white rounded-3xl p-8 sm:p-10 relative overflow-hidden flex flex-col justify-between">
                         <!-- Decor -->
                         <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full filter blur-xl"></div>
@@ -369,7 +426,7 @@
                         <div class="space-y-8 relative z-10">
                             <div>
                                 <h3 class="text-2xl font-bold mb-4">Trụ sở chính</h3>
-                                <p class="text-fujiwa-200 text-sm leading-relaxed">CÔNG TY TNHH FUJIWA VIỆT NAM</p>
+                                <p class="text-fujiwa-200 text-sm leading-relaxed font-semibold">CÔNG TY TNHH FUJIWA VIỆT NAM</p>
                             </div>
 
                             <div class="space-y-4">
@@ -379,11 +436,11 @@
                                 </div>
                                 <div class="flex gap-3 items-start">
                                     <i data-lucide="phone" class="w-5 h-5 text-fujiwa-500 shrink-0 mt-0.5"></i>
-                                    <span class="text-slate-300 text-sm leading-relaxed">Hotline: 1900 6759</span>
+                                    <span class="text-slate-300 text-sm leading-relaxed">Hotline: 1900 8462</span>
                                 </div>
                                 <div class="flex gap-3 items-start">
                                     <i data-lucide="mail" class="w-5 h-5 text-fujiwa-500 shrink-0 mt-0.5"></i>
-                                    <span class="text-slate-300 text-sm leading-relaxed">sales@fujiwavietnam.vn</span>
+                                    <span class="text-slate-300 text-sm leading-relaxed">8462D6@fujiwavietnam.vn</span>
                                 </div>
                             </div>
                         </div>
@@ -420,25 +477,25 @@
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Danh Mục Sản Phẩm</h4>
                     <ul class="space-y-2.5 text-xs">
-                        <li><a href="#" onclick="navigateTo('products'); filterProducts('drink')" class="hover:text-fujiwa-500 transition-colors">Nước Uống I-on Kiềm</a></li>
-                        <li><a href="#" onclick="navigateTo('products'); filterProducts('hygiene')" class="hover:text-fujiwa-500 transition-colors">Nước Muối Súc Miệng</a></li>
-                        <li><a href="#" onclick="navigateTo('products'); filterProducts('hygiene')" class="hover:text-fujiwa-500 transition-colors">Dung Dịch Vệ Sinh Đa Năng</a></li>
-                        <li><a href="#" onclick="navigateTo('products')" class="hover:text-fujiwa-500 transition-colors">Sản Phẩm Khuyến Mãi</a></li>
+                        <li><button onclick="navigateTo('products'); filterProducts('drink')" class="hover:text-fujiwa-500 transition-colors text-left font-medium">Nước Uống I-on Kiềm</button></li>
+                        <li><button onclick="navigateTo('products'); filterProducts('hygiene')" class="hover:text-fujiwa-500 transition-colors text-left font-medium">Chăm Sóc Răng Miệng & Mũi</button></li>
+                        <li><button onclick="navigateTo('products'); filterProducts('supplement')" class="hover:text-fujiwa-500 transition-colors text-left font-medium">Nước Collagen & Giải Độc Gan</button></li>
+                        <li><button onclick="navigateTo('products'); filterProducts('combo')" class="hover:text-fujiwa-500 transition-colors text-left font-medium">Combo Worldcup & Ưu Đãi</button></li>
                     </ul>
                 </div>
 
                 <!-- Chính sách -->
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Chính Sách & Hỗ Trợ</h4>
-                    <ul class="space-y-2.5 text-xs">
-                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Chính sách vận chuyển</a></li>
-                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Chính sách thanh toán</a></li>
-                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Điều khoản & Điều kiện giao dịch</a></li>
-                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Chính sách bảo mật thông tin cá nhân</a></li>
+                    <ul class="space-y-2.5 text-xs text-left">
+                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Chính sách vận chuyển toàn quốc</a></li>
+                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Phương thức thanh toán an toàn</a></li>
+                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Quy trình xử lý khiếu nại & Đổi trả</a></li>
+                        <li><a href="#" class="hover:text-fujiwa-500 transition-colors">Bảo mật thông tin khách hàng</a></li>
                     </ul>
                 </div>
 
-                <!-- Kết nối xã hội & Bản đồ -->
+                <!-- Kết nối xã hội -->
                 <div class="space-y-4">
                     <h4 class="text-white font-bold text-sm uppercase tracking-wider">Liên Kết Mạng Xã Hội</h4>
                     <div class="flex gap-3">
@@ -514,7 +571,7 @@
         </div>
     </div>
 
-    <!-- MODAL XÁC NHẬN THANH TOÁN (THAY CHO ALERT) -->
+    <!-- MODAL XÁC NHẬN THANH TOÁN -->
     <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="toggleCheckoutModal()"></div>
         <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-slate-100 text-center space-y-6">
@@ -536,31 +593,62 @@
         </div>
     </div>
 
+    <!-- MODAL CHI TIẾT SẢN PHẨM -->
+    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="toggleDetailModal()"></div>
+        <div class="bg-white rounded-3xl max-w-2xl w-full relative z-10 shadow-2xl border border-slate-100 overflow-hidden flex flex-col md:flex-row">
+            <!-- Ảnh modal -->
+            <div class="bg-slate-50 p-8 flex items-center justify-center md:w-1/2 aspect-square md:aspect-auto">
+                <img id="detail-product-img" src="" alt="" class="max-h-72 object-contain">
+            </div>
+            <!-- Nội dung modal -->
+            <div class="p-8 md:w-1/2 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start">
+                        <span id="detail-product-tag" class="bg-fujiwa-500/10 text-fujiwa-700 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Mới</span>
+                        <button onclick="toggleDetailModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+                    </div>
+                    <h3 id="detail-product-name" class="text-xl font-bold text-slate-900 leading-snug">Tên sản phẩm</h3>
+                    <p id="detail-product-desc" class="text-slate-500 text-sm leading-relaxed">Mô tả sản phẩm</p>
+                    <div class="flex items-baseline gap-3">
+                        <span id="detail-product-price" class="text-fujiwa-500 font-extrabold text-2xl">0đ</span>
+                        <span id="detail-product-old-price" class="text-slate-400 line-through text-base hidden">0đ</span>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-slate-100 flex gap-3">
+                    <button id="detail-add-btn" class="flex-1 bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors text-sm">
+                        <i data-lucide="shopping-cart" class="w-4 h-4"></i> Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CORE JAVASCRIPT LOGIC -->
     <script>
-        // MẢNG DỮ LIỆU SẢN PHẨM CHÍNH XÁC THEO YÊU CẦU
+        // MẢNG DỮ LIỆU SẢN PHẨM HOÀN CHỈNH (CẬP NHẬT 31 DÒNG SẢN PHẨM & COMBO)
         const PRODUCTS = [
             {
                 id: "fujiwa-1250",
-                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 1250ML - Thùng 12 Chai",
+                name: "Nước Uông I-ON Kiềm Cao Cấp Fujiwa 1250ML - Thùng 12 Chai",
                 category: "drink",
                 price: 192000,
-                originalPrice: 215000,
+                originalPrice: 200000,
                 image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/c618418b2dff4cbc9350db95bd90714dtplv-aphluv4xwc-origin-jpeg.jpeg",
                 unit: "Thùng",
                 tag: "Bán chạy",
-                desc: "Nước uống I-on Kiềm Fujiwa dung tích lớn 1250ml tối ưu bù khoáng, tiện lợi và tiết kiệm cho cả gia đình sử dụng hàng ngày."
+                desc: "Nước uống I-on Kiềm Fujiwa dung tích lớn 1250ml chứa cụm phân tử nước siêu nhỏ giúp cơ thể bù nước cấp tốc, tăng cường thanh lọc."
             },
             {
                 id: "fujisalt",
                 name: "Nước muối súc miệng I-ON fujisalt",
                 category: "hygiene",
                 price: 300000,
-                originalPrice: 360000,
+                originalPrice: 315000,
                 image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/Artboard-4.png",
                 unit: "Hộp/Thùng",
-                tag: "Khuyên dùng",
-                desc: "Dòng sản phẩm súc miệng công nghệ I-on kết hợp muối biển sâu giúp sát khuẩn răng miệng sâu, an toàn, hỗ trợ bảo vệ họng hiệu quả."
+                tag: "Y khoa",
+                desc: "Sự kết hợp hoàn hảo giữa nước ion và muối biển sâu, hỗ trợ diệt khuẩn răng miệng, phòng ngừa các bệnh hô hấp hiệu quả."
             },
             {
                 id: "fujion",
@@ -571,15 +659,329 @@
                 priceRange: "249.000đ - 4.980.000đ",
                 image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/fujion-2-frame-2-1691478182390.jpg",
                 unit: "Chai/Can",
-                tag: "Đa năng",
-                desc: "Giải pháp tẩy rửa diệt khuẩn bề mặt ứng dụng nguồn nước kiềm mạnh an toàn, không hóa chất độc hại thân thiện với môi trường sinh thái."
+                tag: "Sinh học",
+                desc: "Dung dịch vệ sinh đa năng Fujion ứng dụng công nghệ ion kiềm mạnh, giúp làm sạch vượt trội mà không cần chất hóa học độc hại."
+            },
+            // 4 SẢN PHẨM MỚI BỔ SUNG THEO YÊU CẦU:
+            {
+                id: "fujiwa-hydrogen-lon",
+                name: "Nước Uống Fujiwa Giàu Hydrogen Cao Cấp - Thùng 24 Lon",
+                category: "drink",
+                price: 480000,
+                originalPrice: 505000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/z4574328303966-c601fb11478bb5e96c4b9a5c5c2dad42.jpg?v=1709349923470",
+                unit: "Thùng 24 Lon",
+                tag: "Bổ sung Hydro",
+                desc: "Sản phẩm bổ sung bọt khí Hydrogen siêu hoạt tính hòa tan trong thiết kế lon nhôm thời thượng, hỗ trợ ngăn ngừa lão hóa cơ thể tốt nhất."
+            },
+            {
+                id: "fujiwa-kiem-18l",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa Bình 18L",
+                category: "drink",
+                price: 85000,
+                originalPrice: 89000,
+                image: "https://bizweb.dktcdn.net/100/448/480/products/z4571366108846-18ae1b425618297f4b822b081d6f12dd.jpg?v=1691129758717",
+                unit: "Bình 18L",
+                tag: "Gia đình",
+                desc: "Thiết kế bình úp lớn 18L chuyên biệt cho cây nước nóng lạnh tại gia đình và văn phòng, mang đến dòng nước I-on Kiềm sảng khoái suốt ngày dài."
+            },
+            {
+                id: "fujiwa-ph8-24-chai",
+                name: "Nước Uống Ph8 Fujiwa - Thùng 24 Chai",
+                category: "drink",
+                price: 132000,
+                originalPrice: 138000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/z4634337031739-ec0e4a42fde323915d4f091538f59fb8.jpg",
+                unit: "Thùng 24 Chai",
+                tag: "Mới",
+                desc: "Phiên bản nước uống với chỉ số pH chuẩn xác 8.0, cung cấp nguồn khoáng chất dồi dào, giúp nâng niu và bảo vệ niêm mạc tiêu hóa."
+            },
+            {
+                id: "fujiful-sat-khuan-12",
+                name: "Nước Xịt Rửa Tay Diệt Khuẩn Dưỡng Da Fujiful - Hộp 12 Chai",
+                category: "hygiene",
+                price: 1128600,
+                originalPrice: 1188000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/z4574332955024-a13203ed309c0afd448702a99a09a8bd.jpg",
+                unit: "Hộp 12 Chai",
+                tag: "Sạch khuẩn",
+                desc: "Sản phẩm xịt rửa tay tiện lợi giúp diệt 99,9% vi khuẩn có hại bám trên bề mặt tiếp xúc đồng thời dưỡng ẩm sâu cho đôi bàn tay luôn mịn màng."
+            },
+            // DANH SÁCH CÁC SẢN PHẨM KHÁC ĐÃ CÓ:
+            {
+                id: "fujiwa-19l",
+                name: "Nước Uống Tinh Khiết Fujiwa – Bình 19L",
+                category: "drink",
+                price: 65000,
+                originalPrice: 68000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/frame-nuoc-uong-tinh-khiet-fujiwa-19l-1705553103093.jpg",
+                unit: "Bình",
+                tag: "Tiêu chuẩn",
+                desc: "Nước uống tinh khiết đạt độ trong suốt hoàn hảo, ứng dụng lọc màng RO đa tầng, thích hợp dùng đun nấu hoặc uống trực tiếp."
+            },
+            {
+                id: "fujiwa-hydro-thung",
+                name: "Nước Uống Giàu Hydrogen Cao Cấp – Thùng 4 Hộp 12 Túi 270ml",
+                category: "drink",
+                price: 1872000,
+                originalPrice: 1970000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/614d51caaf8948ebb891814fe64e7505tplv-aphluv4xwc-origin-jpeg-1.jpeg",
+                unit: "Thùng",
+                tag: "Thượng hạng",
+                desc: "Thức uống thượng hạng giàu Hydrogen tự nhiên giúp loại bỏ gốc tự do có hại, hỗ trợ cơ thể phòng ngừa lão hóa hiệu quả."
+            },
+            {
+                id: "fujiwa-450",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 450ml – Thùng 24 Chai",
+                category: "drink",
+                price: 180000,
+                originalPrice: 189000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/e50be2f67a65483f9ee645f4adef217ftplv-aphluv4xwc-origin-jpeg-768x768.jpeg",
+                unit: "Thùng",
+                tag: "Khuyên dùng",
+                desc: "Sản phẩm đóng chai 450ml tiện lợi mang theo đi học, đi làm giúp tối ưu hóa thể lực và cân bằng độ pH lý tưởng."
+            },
+            {
+                id: "fujiwa-680",
+                name: "Nước Uống Thanh Khiết Fujiwa – Thùng 20 Chai 680ml",
+                category: "drink",
+                price: 220000,
+                originalPrice: 230000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/thiet-ke-chua-co-ten-2.jpg",
+                unit: "Thùng",
+                tag: "Mới",
+                desc: "Thanh mát và thuần khiết, thiết kế chai 680ml cứng cáp đồng hành cùng mọi hoạt động thể chất dẻo dai."
+            },
+            {
+                id: "fujikey-80ml",
+                name: "Nước giải độc gan Fujikey 80ml - Hộp 10 chai",
+                category: "supplement",
+                price: 590000,
+                originalPrice: 620000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/dff9eb35b1a447db87a6e58ceb557735tplv-aphluv4xwc-origin-jpeg-1024x1024.jpeg",
+                unit: "Hộp",
+                tag: "Giải độc gan",
+                desc: "Nước uống bảo vệ gan Fujikey công thức y học hiện đại thúc đẩy đào thải cặn bã bia rượu và phục hồi sức khỏe gan."
+            },
+            {
+                id: "mui-ion-muoi",
+                name: "Dung Dịch Vệ Sinh Mũi I-ON Muối",
+                category: "hygiene",
+                price: 540000,
+                originalPrice: 560000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/hop-12-chai-dung-ve-sinh-mui-ion-muoi-frame-2-1691476525199.jpg",
+                unit: "Hộp 12 Chai",
+                tag: "Vệ sinh mũi",
+                desc: "Công nghệ xịt phun sương ion muối khoáng an toàn làm dịu niêm mạc mũi nhanh chóng, ngăn ngừa vi khuẩn gây viêm xoang."
+            },
+            {
+                id: "mui-ion-fujisalt",
+                name: "Dung Dịch Vệ Sinh Mũi I-ON Fujisalt",
+                category: "hygiene",
+                price: 540000,
+                originalPrice: 565000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/5aa61c203bb1493dbbd39cf22f9dc710tplv-o3syd03w52-origin-jpeg.jpeg",
+                unit: "Hộp",
+                tag: "Kháng khuẩn",
+                desc: "Hỗ trợ kháng khuẩn tuyệt đối, vệ sinh hàng ngày giúp ngăn chặn sự xâm nhập của bụi bẩn, khói bụi ô nhiễm."
+            },
+            {
+                id: "hydro-hop-12",
+                name: "Nước Uống Giàu Hydrogen Cao Cấp - Hộp 12 Túi 270ml",
+                category: "drink",
+                price: 468000,
+                originalPrice: 492000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/18f58c913bfe40a8a077e4f873ab3526tplv-aphluv4xwc-origin-jpeg-1024x1024.jpeg",
+                unit: "Hộp",
+                tag: "Bổ sung",
+                desc: "Hộp 12 túi Hydrogen cao cấp, nguồn năng lượng năng động thúc đẩy trao đổi chất, thải độc ở cấp độ tế bào."
+            },
+            {
+                id: "canxi-cam",
+                name: "NƯỚC UỐNG GIÀU CANXI VỊ CAM",
+                category: "supplement",
+                price: 396000,
+                originalPrice: null,
+                priceRange: "396.000đ - 1.584.000đ",
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/tui-canxi-06-2-1729743351887.png?v=1729743375597",
+                unit: "Hộp/Thùng",
+                tag: "Bổ sung Canxi",
+                desc: "Vị cam tự nhiên bổ dưỡng giàu canxi sinh học giúp bé phát triển chiều cao vượt trội và hệ xương răng chắc khỏe."
+            },
+            {
+                id: "thanh-khiet-6l",
+                name: "Nước Uống Thanh Khiết Fujiwa - Thùng 2 Bình 6L",
+                category: "drink",
+                price: 166000,
+                originalPrice: 174000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/thiet-ke-chua-co-ten-3.jpg?v=1750394939493",
+                unit: "Thùng",
+                tag: "Vòi xách",
+                desc: "Bình lớn 6L có quai xách phù hợp mang đi dã ngoại hoặc lắp đặt trực tiếp tại các hộ gia đình."
+            },
+            {
+                id: "ion-kiem-300ml",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 300ml - Thùng 24 Chai",
+                category: "drink",
+                price: 152000,
+                originalPrice: 160000,
+                image: "https://bizweb.dktcdn.net/thumb/grande/100/448/480/products/z4574312530134-ecac0ef11dd449bf629e2ca3a512b277.jpg?v=1720596957833",
+                unit: "Thùng",
+                tag: "Nhỏ gọn",
+                desc: "Chai 300ml nhỏ gọn thích hợp đón tiếp khách khứa, hội nghị, trang trọng và tinh tế."
+            },
+            {
+                id: "ion-kiem-6l",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 6L - Thùng 2 Bình",
+                category: "drink",
+                price: 150000,
+                originalPrice: 157000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/9d5ead8d163e4a7fa00e1cea46dea72dtplv-o3syd03w52-origin-jpeg.jpeg",
+                unit: "Thùng",
+                tag: "Vòi tiện ích",
+                desc: "Tích hợp bình vòi cao cấp cung cấp nước kiềm tươi giàu tính kiềm thiên nhiên cho cả ngày làm việc hiệu quả."
+            },
+            {
+                id: "suc-mieng-ion-muoi",
+                name: "Nước Súc Miệng I-ON Muối",
+                category: "hygiene",
+                price: 300000,
+                originalPrice: 310000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/Artboard-5.png",
+                unit: "Thùng",
+                tag: "Răng miệng",
+                desc: "Giải pháp làm sạch khoang miệng dịu nhẹ, đánh bay mảng bám mà không gây ê buốt răng."
+            },
+            {
+                id: "nuoc-ph8-300",
+                name: "Nước Ph8 – Thùng 24 chai 300ml",
+                category: "drink",
+                price: 120000,
+                originalPrice: 125000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/Fujiwa-pH8-300ml_2025_mockup-03-1536x1536.png",
+                unit: "Thùng",
+                tag: "pH chuẩn",
+                desc: "Độ pH chuẩn 8.0 thanh khiết bảo vệ niêm mạc dạ dày và cân bằng nồng độ axit trong các mô cơ."
+            },
+            {
+                id: "speed-ion-24",
+                name: "Thức Uống Bổ Sung Ion Fujiwa Speed – Thùng 24 Chai",
+                category: "drink",
+                price: 408000,
+                originalPrice: 429000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/689df552682641aeba36e3d5fb3194cftplv-aphluv4xwc-origin-jpeg-768x768.jpeg",
+                unit: "Thùng",
+                tag: "Thể thao",
+                desc: "Thành phần điện giải phong phú lý tưởng cho những buổi tập thể lực cường độ cao."
+            },
+            {
+                id: "thanh-khiet-1250",
+                name: "Nước Uống Thanh Khiết Fujiwa – Thùng 12 Chai 1250ml",
+                category: "drink",
+                price: 216000,
+                originalPrice: 227000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/thiet-ke-chua-co-ten-6-768x768.webp",
+                unit: "Thùng",
+                tag: "Đóng chai",
+                desc: "Chai lớn siêu tiết kiệm, mang đến dòng nước sảng khoái đánh tan cái nóng ngày hè nóng bực."
+            },
+            {
+                id: "collagen-50ml",
+                name: "Nước Uống Đẹp Da Fujiwa Collagen 50ml – Hộp 10 Chai",
+                category: "supplement",
+                price: 790000,
+                originalPrice: 830000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/1-hop-10-chai-collagen-1703154262195.jpg?v=1709349674450",
+                unit: "Hộp",
+                tag: "Chăm sóc da",
+                desc: "Hàm lượng Collagen tinh chất phân tử siêu nhỏ mang lại làn da bóng mượt, căng tràn sức sống thanh xuân."
+            },
+            {
+                id: "xit-fujisalt",
+                name: "Nước Xịt Thơm Miệng Fujisalt - Hộp 12 Chai",
+                category: "hygiene",
+                price: 690000,
+                originalPrice: 720000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/nuoc-xit-thom-mieng-fujisalt-hop-12-chai-1706600495997.png?v=1709373367447",
+                unit: "Hộp",
+                tag: "Bảo vệ",
+                desc: "Tự tin rạng ngời với hơi thở thơm mát tức thì nhờ hệ khoáng chất fujisalt tự nhiên."
+            },
+            {
+                id: "hydro-hop-12-alt",
+                name: "Nước Uống Fujiwa Giàu Hydrogen Cao Cấp - Hộp 12 Túi",
+                category: "drink",
+                price: 468000,
+                originalPrice: 492000,
+                image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/480/products/frame-web-01-copy-1716448599616.jpg?v=1716448605503",
+                unit: "Hộp",
+                tag: "Chống Oxy Hóa",
+                desc: "Được sản xuất khép kín, giữ trọn bọt khí Hydrogen siêu hoạt tính nâng tầm thể chất vượt trội."
+            },
+            // CÁC SẢN PHẨM COMBO ĐÃ ĐƯỢC THAY THẾ LIÊN KẾT HÌNH ẢNH TRỰC TIẾP:
+            {
+                id: "combo-worldcup",
+                name: "Combo bình giữ nhiệt và balo Fujiwa mùa Worldcup",
+                category: "combo",
+                price: 890000,
+                originalPrice: 935000,
+                image: "https://i.ibb.co/ymshPW7Y/A914-D508-2585-4-AB1-9030-C19-D10282661.jpg",
+                unit: "Combo",
+                tag: "Phụ kiện",
+                desc: "Sự đồng hành hoàn hảo cho tín đồ yêu bóng đá - Balo thể thao bền bỉ đi kèm bình giữ nhiệt tinh tế."
+            },
+            {
+                id: "speed-390",
+                name: "Thức Uống Bổ Sung Ion Fujiwa Speed 390ml - Thùng 24 chai",
+                category: "drink",
+                price: 360000,
+                originalPrice: 378000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/061c031670c04bca99d0f019e9315935tplv-aphluv4xwc-origin-jpeg.jpeg",
+                unit: "Thùng",
+                tag: "Bù khoáng",
+                desc: "Speed Ion 390ml hỗ trợ bù đắp năng lượng tiêu hao nhanh chóng, xua tan ngay mệt mỏi thể chất."
+            },
+            {
+                id: "kiem-680-20",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 680ml - Thùng 20 Chai",
+                category: "drink",
+                price: 214000,
+                originalPrice: 225000,
+                image: "https://fujiwavietnam.vn/wp-content/uploads/2025/11/dc722d15de28436bb30985a1234d0c2etplv-aphluv4xwc-origin-jpeg.jpeg",
+                unit: "Thùng",
+                tag: "pH 9.0+",
+                desc: "Dòng chai 680ml tối ưu hóa lượng nước cung cấp cho một buổi tập gym, yoga sảng khoái."
+            },
+            {
+                id: "combo-fujisalt-tang-kiem",
+                name: "Combo Dung Dịch Vệ Sinh Mũi I-ON Fujisalt tặng 5 Chai Nước Uống I-ON Kiềm Fujiwa",
+                category: "combo",
+                price: 625000,
+                originalPrice: 657000,
+                image: "https://i.ibb.co/TDdytPXX/Dung-d-ch-v-sinh-m-i-t-ng-combo-5-chai-Fujiwa.jpg",
+                unit: "Combo",
+                tag: "Món quà sức khỏe",
+                desc: "Gói bảo vệ cơ thể từ trong ra ngoài: Sạch mũi sát khuẩn đồng thời nâng cấp sức khỏe nhờ nước ion kiềm."
+            },
+            {
+                id: "combo-fujisalt-tang-hydro",
+                name: "Combo 1 Thùng Nước Súc Miệng I-ON Muối tặng 2 Nước Uống Fujiwa Giàu Hydrogen Cao Cấp",
+                category: "combo",
+                price: 370000,
+                originalPrice: 390000,
+                image: "https://i.ibb.co/fGTHvNmZ/Gemini-Generated-Image-qs0hpqs0hpqs0hpq.png",
+                unit: "Combo",
+                tag: "Ưu đãi lớn",
+                desc: "Chăm sóc trọn vẹn vệ sinh gia đình với quà tặng độc quyền - Túi nước giàu Hydrogen thượng hạng."
             }
         ];
 
         // Khởi tạo trạng thái giỏ hàng
         let cart = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
 
-        // HÀM CHUYỂN TRANG (Single Page App)
+        // HÀM CHUYỂN TRANG
         function navigateTo(pageId) {
             // Ẩn tất cả các trang
             document.querySelectorAll('.page-content').forEach(page => {
@@ -606,6 +1008,15 @@
                 activeNav.classList.add('text-fujiwa-500', 'font-semibold', 'border-b-2', 'border-fujiwa-500');
             }
 
+            // Reset tìm kiếm & lọc khi điều hướng về Home
+            if (pageId === 'home') {
+                activeCategory = 'all';
+                searchQuery = '';
+                document.getElementById('shop-search-input').value = '';
+                document.getElementById('global-search-input').value = '';
+                filterProducts('all');
+            }
+
             // Cuộn lên đầu trang mượt mà
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -628,76 +1039,147 @@
         function renderProducts() {
             const featuredContainer = document.getElementById('featured-products-grid');
             const shopContainer = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
 
             if (!featuredContainer || !shopContainer) return;
 
-            // Xóa rỗng container trước khi đổ
             featuredContainer.innerHTML = '';
             shopContainer.innerHTML = '';
 
-            PRODUCTS.forEach(prod => {
-                const discountPercentage = prod.originalPrice 
-                    ? Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100) 
-                    : 0;
-
-                const priceDisplay = prod.priceRange 
-                    ? `<span class="text-fujiwa-500 font-extrabold text-base">${prod.priceRange}</span>`
-                    : `<span class="text-fujiwa-500 font-extrabold text-lg">${formatCurrency(prod.price)}</span>`;
-
-                const oldPriceDisplay = prod.originalPrice 
-                    ? `<span class="text-slate-400 line-through text-sm">${formatCurrency(prod.originalPrice)}</span>` 
-                    : '';
-
-                const badgeDiscount = discountPercentage > 0 
-                    ? `<span class="absolute top-4 left-4 bg-rose-500 text-white font-extrabold text-[11px] px-2.5 py-1 rounded-full shadow-md">-${discountPercentage}%</span>`
-                    : '';
-
-                const productHTML = `
-                    <div class="product-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative flex flex-col justify-between">
-                        <div>
-                            <!-- Hình ảnh -->
-                            <div class="bg-slate-50 p-6 relative aspect-square flex items-center justify-center overflow-hidden border-b border-slate-50">
-                                ${badgeDiscount}
-                                <span class="absolute top-4 right-4 bg-fujiwa-500/10 text-fujiwa-700 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">${prod.tag}</span>
-                                <img src="${prod.image}" alt="${prod.name}" onerror="this.src='https://placehold.co/400x400/f8fafc/0079FF?text=FUJIWA'" class="product-image max-h-full max-w-full object-contain transition-transform duration-500">
-                            </div>
-
-                            <!-- Thông tin -->
-                            <div class="p-6 space-y-3">
-                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">${prod.unit}</span>
-                                <h3 class="font-bold text-slate-800 text-base line-clamp-2 hover:text-fujiwa-500 transition-colors cursor-pointer" onclick="navigateTo('products')">${prod.name}</h3>
-                                <p class="text-slate-500 text-xs line-clamp-2 leading-relaxed">${prod.desc}</p>
-                            </div>
-                        </div>
-
-                        <!-- Chân Card (Mua & Giá) -->
-                        <div class="p-6 pt-0 border-t border-slate-50 mt-4 space-y-4">
-                            <div class="flex items-baseline justify-between gap-2">
-                                <div class="flex flex-col">
-                                    ${priceDisplay}
-                                    ${oldPriceDisplay}
-                                </div>
-                                <span class="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i data-lucide="check" class="w-3 h-3"></i> Còn hàng</span>
-                            </div>
-                            
-                            <button onclick="addToCart('${prod.id}')" class="w-full bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 transform active:scale-95 text-sm">
-                                <i data-lucide="shopping-cart" class="w-4 h-4"></i> Thêm vào giỏ
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                // Xuất ra đồng thời trang chủ và trang shop
-                featuredContainer.insertAdjacentHTML('beforeend', productHTML);
-                shopContainer.insertAdjacentHTML('beforeend', productHTML);
+            // Lấy 4 sản phẩm bán chạy nhất/phổ biến nhất ra trang chủ
+            const featuredProds = PRODUCTS.slice(0, 4);
+            featuredProds.forEach(prod => {
+                const cardHTML = generateProductCardHTML(prod);
+                featuredContainer.insertAdjacentHTML('beforeend', cardHTML);
             });
+
+            // Lọc và render danh sách trang cửa hàng
+            let filtered = PRODUCTS;
+            
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === activeCategory);
+            }
+
+            if (searchQuery.trim() !== '') {
+                const q = searchQuery.toLowerCase().trim();
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+            }
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                filtered.forEach(prod => {
+                    const cardHTML = generateProductCardHTML(prod);
+                    shopContainer.insertAdjacentHTML('beforeend', cardHTML);
+                });
+            }
 
             lucide.createIcons();
         }
 
-        // LỌC SẢN PHẨM TRÊN SHOP
+        // HÀM TẠO CARD HTML SẢN PHẨM
+        function generateProductCardHTML(prod) {
+            const discountPercentage = prod.originalPrice 
+                ? Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100) 
+                : 0;
+
+            const priceDisplay = prod.priceRange 
+                ? `<span class="text-fujiwa-500 font-extrabold text-sm sm:text-base">${prod.priceRange}</span>`
+                : `<span class="text-fujiwa-500 font-extrabold text-base sm:text-lg">${formatCurrency(prod.price)}</span>`;
+
+            const oldPriceDisplay = prod.originalPrice 
+                ? `<span class="text-slate-400 line-through text-xs sm:text-sm">${formatCurrency(prod.originalPrice)}</span>` 
+                : '';
+
+            const badgeDiscount = discountPercentage > 0 
+                ? `<span class="absolute top-4 left-4 bg-rose-500 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full shadow-md">-${discountPercentage}%</span>`
+                : '';
+
+            return `
+                <div class="product-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <!-- Hình ảnh -->
+                        <div class="bg-slate-50 p-6 relative aspect-square flex items-center justify-center overflow-hidden border-b border-slate-50 cursor-pointer" onclick="openProductDetail('${prod.id}')">
+                            ${badgeDiscount}
+                            <span class="absolute top-4 right-4 bg-fujiwa-500/10 text-fujiwa-700 font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider">${prod.tag}</span>
+                            <img src="${prod.image}" alt="${prod.name}" onerror="this.src='https://placehold.co/400x400/f8fafc/0079FF?text=FUJIWA'" class="product-image max-h-full max-w-full object-contain transition-transform duration-500">
+                        </div>
+
+                        <!-- Thông tin -->
+                        <div class="p-5 space-y-2">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">${prod.unit}</span>
+                            <h3 class="font-bold text-slate-800 text-sm line-clamp-2 hover:text-fujiwa-500 transition-colors cursor-pointer" onclick="openProductDetail('${prod.id}')">${prod.name}</h3>
+                            <p class="text-slate-500 text-[11px] line-clamp-2 leading-relaxed">${prod.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Chân Card -->
+                    <div class="p-5 pt-0 border-t border-slate-50 mt-2 space-y-3">
+                        <div class="flex items-baseline justify-between gap-1">
+                            <div class="flex flex-col">
+                                ${priceDisplay}
+                                ${oldPriceDisplay}
+                            </div>
+                            <span class="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded flex items-center gap-0.5 shrink-0"><i data-lucide="check" class="w-2.5 h-2.5"></i> Sẵn sàng</span>
+                        </div>
+                        
+                        <button onclick="addToCart('${prod.id}')" class="w-full bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 transform active:scale-95 text-xs">
+                            <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // MỞ POPUP CHI TIẾT SẢN PHẨM
+        function openProductDetail(productId) {
+            const prod = PRODUCTS.find(p => p.id === productId);
+            if (!prod) return;
+
+            document.getElementById('detail-product-img').src = prod.image;
+            document.getElementById('detail-product-img').onerror = function() {
+                this.src = 'https://placehold.co/400x400/f8fafc/0079FF?text=FUJIWA';
+            }
+            document.getElementById('detail-product-name').innerText = prod.name;
+            document.getElementById('detail-product-desc').innerText = prod.desc;
+            document.getElementById('detail-product-tag').innerText = prod.tag;
+
+            const priceElem = document.getElementById('detail-product-price');
+            const oldPriceElem = document.getElementById('detail-product-old-price');
+
+            if (prod.priceRange) {
+                priceElem.innerText = prod.priceRange;
+                oldPriceElem.classList.add('hidden');
+            } else {
+                priceElem.innerText = formatCurrency(prod.price);
+                if (prod.originalPrice) {
+                    oldPriceElem.innerText = formatCurrency(prod.originalPrice);
+                    oldPriceElem.classList.remove('hidden');
+                } else {
+                    oldPriceElem.classList.add('hidden');
+                }
+            }
+
+            document.getElementById('detail-add-btn').onclick = function() {
+                addToCart(prod.id);
+                toggleDetailModal();
+            };
+
+            toggleDetailModal();
+            lucide.createIcons();
+        }
+
+        function toggleDetailModal() {
+            const modal = document.getElementById('detail-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // BỘ LỌC DANH MỤC
         function filterProducts(category) {
-            // Đổi active button style
+            activeCategory = category;
+
+            // Đổi active button style trên thanh lọc
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('bg-fujiwa-500', 'text-white', 'shadow-md');
                 btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'shadow-sm');
@@ -709,68 +1191,24 @@
                 activeBtn.classList.add('bg-fujiwa-500', 'text-white', 'shadow-md');
             }
 
-            // Thực hiện lọc logic
-            const shopContainer = document.getElementById('products-grid');
-            shopContainer.innerHTML = '';
+            renderProducts();
+        }
 
-            const filtered = category === 'all' 
-                ? PRODUCTS 
-                : PRODUCTS.filter(p => p.category === category);
+        // XỬ LÝ TÌM KIẾM
+        function handleSearch(val) {
+            searchQuery = val;
+            
+            // Đồng bộ 2 ô tìm kiếm (Global & Shop)
+            document.getElementById('shop-search-input').value = val;
+            document.getElementById('global-search-input').value = val;
 
-            filtered.forEach(prod => {
-                const discountPercentage = prod.originalPrice 
-                    ? Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100) 
-                    : 0;
+            // Tự chuyển sang trang Sản phẩm nếu người dùng đang ở trang khác và bắt đầu tìm kiếm
+            const activePage = document.querySelector('.page-content:not(.hidden)');
+            if (activePage && activePage.id !== 'page-products' && val.trim() !== '') {
+                navigateTo('products');
+            }
 
-                const priceDisplay = prod.priceRange 
-                    ? `<span class="text-fujiwa-500 font-extrabold text-base">${prod.priceRange}</span>`
-                    : `<span class="text-fujiwa-500 font-extrabold text-lg">${formatCurrency(prod.price)}</span>`;
-
-                const oldPriceDisplay = prod.originalPrice 
-                    ? `<span class="text-slate-400 line-through text-sm">${formatCurrency(prod.originalPrice)}</span>` 
-                    : '';
-
-                const badgeDiscount = discountPercentage > 0 
-                    ? `<span class="absolute top-4 left-4 bg-rose-500 text-white font-extrabold text-[11px] px-2.5 py-1 rounded-full shadow-md">-${discountPercentage}%</span>`
-                    : '';
-
-                const productHTML = `
-                    <div class="product-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative flex flex-col justify-between">
-                        <div>
-                            <!-- Hình ảnh -->
-                            <div class="bg-slate-50 p-6 relative aspect-square flex items-center justify-center overflow-hidden border-b border-slate-50">
-                                ${badgeDiscount}
-                                <span class="absolute top-4 right-4 bg-fujiwa-500/10 text-fujiwa-700 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">${prod.tag}</span>
-                                <img src="${prod.image}" alt="${prod.name}" onerror="this.src='https://placehold.co/400x400/f8fafc/0079FF?text=FUJIWA'" class="product-image max-h-full max-w-full object-contain transition-transform duration-500">
-                            </div>
-
-                            <!-- Thông tin -->
-                            <div class="p-6 space-y-3">
-                                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">${prod.unit}</span>
-                                <h3 class="font-bold text-slate-800 text-base line-clamp-2 hover:text-fujiwa-500 transition-colors cursor-pointer">${prod.name}</h3>
-                                <p class="text-slate-500 text-xs line-clamp-2 leading-relaxed">${prod.desc}</p>
-                            </div>
-                        </div>
-
-                        <!-- Chân Card -->
-                        <div class="p-6 pt-0 border-t border-slate-50 mt-4 space-y-4">
-                            <div class="flex items-baseline justify-between gap-2">
-                                <div class="flex flex-col">
-                                    ${priceDisplay}
-                                    ${oldPriceDisplay}
-                                </div>
-                                <span class="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded flex items-center gap-0.5"><i data-lucide="check" class="w-3 h-3"></i> Còn hàng</span>
-                            </div>
-                            
-                            <button onclick="addToCart('${prod.id}')" class="w-full bg-fujiwa-500 hover:bg-fujiwa-600 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 transform active:scale-95 text-sm">
-                                <i data-lucide="shopping-cart" class="w-4 h-4"></i> Thêm vào giỏ
-                            </button>
-                        </div>
-                    </div>
-                `;
-                shopContainer.insertAdjacentHTML('beforeend', productHTML);
-            });
-            lucide.createIcons();
+            renderProducts();
         }
 
         // ĐỊNH DẠNG ĐỒNG VNĐ
@@ -816,7 +1254,7 @@
                 const itemHTML = `
                     <div class="flex items-center gap-4 py-4 border-b border-slate-100 last:border-0">
                         <div class="w-20 h-20 bg-slate-50 rounded-2xl p-2 shrink-0 border border-slate-100 flex items-center justify-center overflow-hidden">
-                            <img src="${item.product.image}" alt="${item.product.name}" class="max-h-full max-w-full object-contain">
+                            <img src="${item.product.image}" alt="${item.product.name}" onerror="this.src='https://placehold.co/100x100/f8fafc/0079FF?text=FUJIWA'" class="max-h-full max-w-full object-contain">
                         </div>
                         <div class="flex-grow space-y-1">
                             <h4 class="font-bold text-slate-800 text-xs line-clamp-2">${item.product.name}</h4>
