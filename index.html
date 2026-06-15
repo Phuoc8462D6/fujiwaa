@@ -105,7 +105,7 @@
         <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white/95 px-4 py-4 space-y-3 shadow-lg">
             <div class="relative mb-3">
                 <input type="text" oninput="handleSearch(this.value)" placeholder="Tìm sản phẩm..." class="w-full bg-slate-100 border-none rounded-full py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-fujiwa-500">
-                <i data-lucide="search" class="absolute left-3.5 top-2.5 w-4 h-4 text-slate-400"></i>
+                <i data-lucide="search" class="absolute left-3.5 top-2.5 w-4.5 h-4.5 text-slate-400"></i>
             </div>
             <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-semibold text-fujiwa-500 bg-fujiwa-50 rounded-lg">Trang chủ</button>
             <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">Giới thiệu</button>
@@ -254,7 +254,7 @@
                     <div class="space-y-4 max-w-lg">
                         <span class="text-fujiwa-500 font-bold text-sm tracking-widest uppercase">Cửa Hàng Trực Tuyến</span>
                         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Danh Mục Sản Phẩm</h1>
-                        <p class="text-slate-500">Khám phá dải sản phẩm sức khỏe, nước ion kiềm chất lượng Nhật Bản và các giải pháp chăm sóc gia đình.</p>
+                        <p class="text-slate-500">Khám phá dải sản phẩm sức khỏe, nước i-on kiềm chất lượng Nhật Bản và các giải pháp chăm sóc gia đình.</p>
                     </div>
                     <!-- Tìm kiếm & Lọc trên trang -->
                     <div class="w-full md:w-auto flex flex-col gap-3">
@@ -268,7 +268,7 @@
                 <!-- Thanh lọc danh mục hiện đại -->
                 <div class="flex flex-wrap gap-2.5 justify-center mb-10" id="filter-buttons-container">
                     <button onclick="filterProducts('all')" class="bg-fujiwa-500 text-white font-semibold py-2.5 px-6 rounded-full shadow-md text-sm filter-btn transition-all duration-200" id="btn-filter-all">Tất cả</button>
-                    <button onclick="filterProducts('drink')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-drink">Nước uống & Bù Ion</button>
+                    <button onclick="filterProducts('drink')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-drink">Nước uống & Bù I-ON</button>
                     <button onclick="filterProducts('hygiene')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-hygiene">Chăm sóc & Vệ sinh</button>
                     <button onclick="filterProducts('supplement')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-supplement">Hỗ trợ sức khỏe</button>
                     <button onclick="filterProducts('combo')" class="bg-white text-slate-600 hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-full shadow-sm text-sm border border-slate-200 filter-btn transition-all duration-200" id="btn-filter-combo">Combo ưu đãi</button>
@@ -462,12 +462,12 @@
     <footer class="bg-fujiwa-900 text-slate-400 pt-16 pb-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <!-- Về Fujiwa -->
+                <!-- Về Fujiwa (Logo chân trang đã đổi theo liên kết mới) -->
                 <div class="space-y-4">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEwnGlyz3CSG9YXkn7FPM7cyBx2xh2ZgpuwbkMJgDWnerSmb24oywE0Ag&s=10" 
+                    <img src="https://static1.squarespace.com/static/5930dc9237c5817c00b10842/5ab9b86870a6adbe9b6fc6aa/6090a86d6d5e561d1159671f/1620274727977/N1015_logo-fujiwa-viet-nam-000.png?format=1500w" 
                          alt="Fujiwa Vietnam Logo" 
                          onerror="this.src='https://placehold.co/150x60/0079FF/FFFFFF?text=FUJIWA'"
-                         class="h-14 w-auto object-contain brightness-0 invert opacity-90">
+                         class="h-16 w-auto object-contain bg-white/10 p-1.5 rounded-lg opacity-90">
                     <p class="text-xs leading-relaxed text-slate-400">
                         Fujiwa luôn luôn phấn đấu, cập nhật cải tiến không ngừng để mang đến cuộc sống hạnh phúc và chất lượng sức khỏe tối ưu cho hàng vạn gia đình Việt Nam thông qua nguồn nước sạch và các sản phẩm chất lượng Nhật Bản.
                     </p>
@@ -495,13 +495,22 @@
                     </ul>
                 </div>
 
-                <!-- Kết nối xã hội -->
+                <!-- Kết nối xã hội (Đã cập nhật logo Instagram mới theo yêu cầu) -->
                 <div class="space-y-4">
                     <h4 class="text-white font-bold text-sm uppercase tracking-wider">Liên Kết Mạng Xã Hội</h4>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 hover:bg-fujiwa-500 text-white flex items-center justify-center transition-all duration-200"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 hover:bg-rose-500 text-white flex items-center justify-center transition-all duration-200"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 hover:bg-red-500 text-white flex items-center justify-center transition-all duration-200"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                    <div class="flex flex-wrap gap-3 items-center">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/ionkiem.fujiwa" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full overflow-hidden bg-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-sm border border-slate-700" title="Facebook Fujiwa">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" class="w-full h-full object-cover">
+                        </a>
+                        <!-- Instagram (Đã thay đổi liên kết ảnh trực tiếp sang link ảnh mới) -->
+                        <a href="https://www.instagram.com/fujiwa_vietnam/" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full overflow-hidden bg-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-sm border border-slate-700" title="Instagram Fujiwa">
+                            <img src="https://img.magnific.com/vector-cao-cap/bieu-tuong-vector-logo-instagram-logotype-mang-xa-hoi_901408-392.jpg?semt=ais_hybrid&w=740&q=80" alt="Instagram" class="w-full h-full object-cover">
+                        </a>
+                        <!-- Trang chính Fujiwa Việt Nam -->
+                        <a href="https://fujiwavietnam.vn/" target="_blank" rel="noopener noreferrer" class="h-8 px-2 rounded-lg bg-white flex items-center justify-center transition-all duration-200 hover:scale-115 shadow-sm border border-slate-700" title="Website chính thức Fujiwa Việt Nam">
+                            <img src="https://static1.squarespace.com/static/5930dc9237c5817c00b10842/5ab9b86870a6adbe9b6fc6aa/6090a86d6d5e561d1159671f/1620274727977/N1015_logo-fujiwa-viet-nam-000.png?format=1500w" alt="Fujiwa Vietnam Website" class="h-5 w-auto object-contain">
+                        </a>
                     </div>
                     <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
                         <p class="text-[11px] text-slate-400">Bạn muốn tìm hiểu thêm về đại lý phân phối gần bạn?</p>
@@ -630,7 +639,7 @@
         const PRODUCTS = [
             {
                 id: "fujiwa-1250",
-                name: "Nước Uông I-ON Kiềm Cao Cấp Fujiwa 1250ML - Thùng 12 Chai",
+                name: "Nước Uống I-ON Kiềm Cao Cấp Fujiwa 1250ML - Thùng 12 Chai", 
                 category: "drink",
                 price: 192000,
                 originalPrice: 200000,
